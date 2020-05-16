@@ -14,7 +14,24 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('index');
+});
+
+
+Route::get('/categoria/listar_todos', function () {
+    return view('listar_categoria');
+});
+
+Route::get('/busca/resultado', function () {
+    return view('listar_busca');
+});
+
+Route::get('/produto/1', function () {
+    return view('produto');
+});
+
+Route::get('/carrinho', function () {
+    return view('carrinho');
 });
 
 Auth::routes();
