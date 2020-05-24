@@ -38,4 +38,8 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    function enderecos(){
+        return $this->hasMany('App\Enderecos', 'id_usuario', 'id');
+    }
 }

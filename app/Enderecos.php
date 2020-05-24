@@ -11,4 +11,8 @@ class Enderecos extends Model
 
     protected $primaryKey = "id";
     protected $table = "enderecos";
+
+    function usuario(){
+    	return $this->belongsTo('App\User', 'id_usuario', 'id');
+    }
 }
