@@ -11,4 +11,8 @@ class CategoriaProdutos extends Model
 	
     protected $primaryKey = "id";
     protected $table = "categoria_produtos";
+
+    function produtos(){
+        return $this->hasMany('App\Produto', 'id_produto', 'id');
+    }
 }

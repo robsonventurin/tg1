@@ -30,5 +30,7 @@ class Produto extends Model
         return 'slug';
     }
 	
-   
+   function categoria(){
+        return $this->belongsTo('App\CategoriaProdutos', 'id_produto', 'id');
+    }
 }
