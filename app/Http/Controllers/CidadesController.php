@@ -44,7 +44,7 @@ class CidadesController extends Controller
     }
 
     function deletarCidade($id){
-            $cidade = User::find($id);
+            $cidade = Cidade::find($id);
 
         if ($cidade->delete()) {
             $msg = "Cidade deletada com sucesso!";

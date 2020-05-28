@@ -70,8 +70,5 @@ class UsersController extends Controller
          }
 
          return view('confirm', ['mensagem' => $msg]);
-        }else{
-            return view ('welcome');
-        }
     }
 }
