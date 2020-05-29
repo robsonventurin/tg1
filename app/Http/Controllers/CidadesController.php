@@ -54,4 +54,17 @@ class CidadesController extends Controller
 
          return view('confirm', ['mensagem' => $msg]);
     }
+
+    function telaListarCidade(){
+        return view('cidades.listar');
+    }
+
+    function telaCadastrarCidade(){
+        return view('cidades.adicionar');
+    }
+
+     function telaAlterarCidade($id){
+        $cidades = Cidade::find($id);
+        return view('cidades.alterar', ['cidades' => $cidades]);
+    }
 }

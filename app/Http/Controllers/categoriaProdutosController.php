@@ -53,4 +53,17 @@ class categoriaProdutosController extends Controller
 
          return view('confirm', ['mensagem' => $msg]);
     }
+
+    function telaListarCategoriaProduto(){
+        return view('categoria_produtos.listar');
+    }
+
+    function telaCadastrarCategoriaProduto(){
+        return view('categoria_produtos.adicionar');
+    }
+
+     function telaAlterarCategoriaProduto($id){
+        $categoria_produtos = CategoriaProdutos::find($id);
+        return view('categoria_produtos.alterar', ['categoria_produtos' => $categoria_produtos]);
+    }
 }

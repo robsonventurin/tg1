@@ -36,4 +36,14 @@ class VendasController extends Controller
 
          return view('confirm', ['mensagem' => $msg]);
     }
+
+    function telaListarVenda(){
+        return view('vendas.listar');
+    }
+
+    function telaListarItensVenda($id) {
+        $venda = Venda::find($id);
+
+        return view('vendas.listar_itens', ['venda' => $venda]);
+    }
 }

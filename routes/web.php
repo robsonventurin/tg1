@@ -24,25 +24,33 @@ Route::get('/produto/1', function () { return view('produto'); });
 
 Route::get('/carrinho', function () { return view('carrinho'); });
 
+Route::get('/categoria_produtos/listar', 'categoriaProdutosController@telaListarCategoriaProduto')->name('telaListarCategoriaProduto');
+Route::get('/categoria_produtos/cadastrar', 'categoriaProdutosController@telaCadastrarCategoriaProduto')->name('telaCadastrarCategoriaProduto');
+Route::post('/categoria_produtos/cadastrar/novo', 'categoriaProdutosController@cadastrarCategoriaProduto')->name('cadastrarCategoriaProduto');
+Route::get('/categoria_produtos/alterar/{id}', 'categoriaProdutosController@telaAlterarCategoriaProduto')->name('telaAlterarCategoriaProduto');
+Route::post('/categoria_produtos/alterar/{id}', 'categoriaProdutosController@alterarCategoriaProduto')->name('alterarCategoriaProduto');
 
-Route::get('/categoria_produtos/listar', function () { return view('categoria_produtos.listar'); });
-Route::get('/categoria_produtos/adicionar', function () { return view('categoria_produtos.adicionar'); });
-Route::get('/categoria_produtos/alterar/1', function () { return view('categoria_produtos.alterar'); });
 
-Route::get('/produtos/listar', function () { return view('produtos.listar'); });
-Route::get('/produtos/adicionar', function () { return view('produtos.adicionar'); });
-Route::get('/produtos/alterar/1', function () { return view('produtos.alterar'); });
+Route::get('/produtos/listar', 'ProdutosController@telaListarProduto')->name('telaListarProduto');
+Route::get('/produtos/cadastrar', 'ProdutosController@telaCadastrarProduto')->name('telaCadastrarProduto');
+Route::post('/produtos/cadastrar/novo', 'ProdutosController@cadastrarProduto')->name('cadastrarProduto');
+Route::get('/produtos/alterar/{id}', 'ProdutosController@telaAlterarProduto')->name('telaAlterarProduto');
+Route::post('/produtos/alterar/{id}', 'ProdutosController@alterarProduto')->name('alterarProduto');
 
-Route::get('/cidades/listar', function () { return view('cidades.listar'); });
-Route::get('/cidades/adicionar', function () { return view('cidades.adicionar'); });
-Route::get('/cidades/alterar/1', function () { return view('cidades.alterar'); });
+Route::get('/cidades/listar', 'CidadesController@telaListarCidade')->name('telaListarCidade');
+Route::get('/cidades/cadastrar', 'CidadesController@telaCadastrarCidade')->name('telaCadastrarCidade');
+Route::post('/cidades/cadastrar/novo', 'CidadesController@cadastrarCidade')->name('cadastrarCidade');
+Route::get('/cidades/alterar/{id}', 'CidadesController@telaAlterarCidade')->name('telaAlterarCidade');
+Route::post('/cidades/alterar/{id}', 'CidadesController@alterarCidade')->name('alterarCidade');
 
-Route::get('/vendas/listar', function () { return view('vendas.listar'); });
-Route::get('/vendas/listar/itens/1', function () { return view('vendas.listar_itens'); });
+Route::get('/vendas/listar', 'VendasController@telaListarVendas')->name('telaListarVenda');
+Route::get('/vendas/{id}/listar/itens', 'VendasController@telaListarItensVenda')->name('telaListarItensVenda');
 
-Route::get('/enderecos/listar', function () { return view('enderecos.listar'); });
-Route::get('/enderecos/adicionar', function () { return view('enderecos.adicionar'); });
-Route::get('/enderecos/alterar/1', function () { return view('enderecos.alterar'); });
+Route::get('/enderecos/listar', 'EnderecosController@telaListarEndereco')->name('telaListarEndereco');
+Route::get('/enderecos/cadastrar', 'EnderecosController@telaCadastrarEndereco')->name('telaCadastrarEndereco');
+Route::post('/enderecos/cadastrar/novo', 'EnderecosController@cadastrarEndereco')->name('cadastrarEndereco');
+Route::get('/enderecos/alterar/{id}', 'EnderecosController@telaAlterarEndereco')->name('telaAlterarEndereco');
+Route::post('/enderecos/alterar/{id}', 'EnderecosController@alterarEndereco')->name('alterarEndereco');
 
 Auth::routes();
 
