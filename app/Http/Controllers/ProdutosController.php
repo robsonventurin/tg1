@@ -65,4 +65,17 @@ class ProdutosController extends Controller
 
          return view('confirm', ['mensagem' => $msg]);
     }
+
+    function telaListarProduto(){
+        return view('produtos.listar');
+    }
+
+    function telaCadastrarProduto(){
+        return view('produtos.adicionar');
+    }
+
+     function telaAlterarProduto($id){
+        $produtos = Produto::find($id);
+        return view('produtos.alterar', ['produtos' => $produtos]);
+    }
 }
