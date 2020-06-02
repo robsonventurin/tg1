@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Enderecos;
+use App\Cidade;
 
 class EnderecosController extends Controller
 {
@@ -13,6 +14,7 @@ class EnderecosController extends Controller
     	$numero = $req->input('numero');
     	$bairro = $req->input('bairro');
     	$id_cidades = $req->input('id_cidades');
+    	$id_users = $req->input('id_users');
 
     	$endereco = new Enderecos();
     	$endereco->descricao = $descricao;
@@ -20,6 +22,7 @@ class EnderecosController extends Controller
     	$endereco->numero = $numero;
     	$endereco->bairro = $bairro;
     	$endereco->id_cidades = $id_cidades;
+    	$endereco->id_users = $id_users;
 
     	if ($endereco->save()) {
             $msg = "Endereço cadastrado com sucesso!";
@@ -27,7 +30,7 @@ class EnderecosController extends Controller
             $msg = "Cadastro de endereço não foi bem sucedido!";
          }
 
-         return view('confirm', ['mensagem' => $msg ]);
+         return view('resultado', ['mensagem' => $msg ]);
 
 }
 
@@ -51,7 +54,7 @@ class EnderecosController extends Controller
             $msg = "Atualização de endereço não foi bem sucedido!";
          }
 
-         return view('confirm', ['mensagem' => $msg]);
+         return view('resultado', ['mensagem' => $msg]);
     }
 
     function deletarEndereco($id){
@@ -63,6 +66,22 @@ class EnderecosController extends Controller
             $msg = "Erro ao excluir endereço!";
          }
 
-         return view('confirm', ['mensagem' => $msg]);
+         return view('resultado', ['mensagem' => $msg]);
+    }
+
+    function telaListarEndereco() {
+        $lista = Enderecos::all();
+        return view ("enderecos.listar", ['enderecos'=>$lista]);
+    }
+
+    function telaCadastrarEndereco() {
+        $cidades = Cidade::all();
+        return view ("enderecos.adicionar", ['cidades'=>$cidades]);
+    }
+
+    function telaAlterarEndereco($id) {
+        $e = Enderecos::find($id);
+        $cidades = Cidade::all();
+        return view ("enderecos.alterar", ['e'=>$e, 'cidades'=>$cidades]);
     }
 }

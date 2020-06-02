@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
 use App\Venda;
+use App\Produto;
 
 class VendasController extends Controller
 {
@@ -37,8 +40,26 @@ class VendasController extends Controller
          return view('confirm', ['mensagem' => $msg]);
     }
 
-    function telaListarVenda(){
-        return view('vendas.listar');
+    function telaListarVendas(){
+        $vendas = Venda::all();
+        return view('vendas.listar', ['vendas'=>$vendas]);
+    }
+
+
+    function telaMinhasCompras(){
+        $vendas = Auth::user()->vendas;
+        return view('vendas.minhas_compras', ['vendas' => $vendas]);
+    }
+
+    function telaMinhasComprasId($id){
+        $venda = Venda::find($id);
+        $produtos = $venda->produtos;
+        if ($produtos != null) {
+            foreach($produtos as $key => $p) {
+                $produtos[$key]['info'] = Produto::find($p['id']);
+            }
+        }
+        return view('vendas.minhas_compras_id', ['produtos'=> $produtos, 'venda' => $venda]);
     }
 
     function telaListarItensVenda($id) {

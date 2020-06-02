@@ -22,7 +22,7 @@ class CidadesController extends Controller
             $msg = "Cadastro de cidade não foi bem sucedido!";
          }
 
-         return view('confirm', ['mensagem' => $msg ]);
+         return view('resultado', ['mensagem' => $msg ]);
 
 }
 
@@ -40,11 +40,11 @@ class CidadesController extends Controller
             $msg = "Atualização de cidade não foi bem sucedida!";
          }
 
-         return view('confirm', ['mensagem' => $msg]);
+         return view('resultado', ['mensagem' => $msg]);
     }
 
     function deletarCidade($id){
-            $cidade = Cidade::find($id);
+        $cidade = Cidade::find($id);
 
         if ($cidade->delete()) {
             $msg = "Cidade deletada com sucesso!";
@@ -52,11 +52,12 @@ class CidadesController extends Controller
             $msg = "Erro ao excluir cidade!";
          }
 
-         return view('confirm', ['mensagem' => $msg]);
+         return view('resultado', ['mensagem' => $msg]);
     }
 
     function telaListarCidade(){
-        return view('cidades.listar');
+        $cidades = Cidade::all();
+        return view('cidades.listar', ['cidades'=>$cidades]);
     }
 
     function telaCadastrarCidade(){
@@ -64,7 +65,7 @@ class CidadesController extends Controller
     }
 
      function telaAlterarCidade($id){
-        $cidades = Cidade::find($id);
-        return view('cidades.alterar', ['cidades' => $cidades]);
+        $c = Cidade::find($id);
+        return view('cidades.alterar', ['c' => $c]);
     }
 }

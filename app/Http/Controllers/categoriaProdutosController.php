@@ -4,12 +4,16 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\CategoriaProdutos;
+use App\Produto;
 
 class categoriaProdutosController extends Controller
 {
     function cadastrarCategoriaProduto(Request $req){
     	$nome = $req->input('name');
-    	$descricao = $req->input('categoria_pai');
+        $categoria_pai = $req->input('categoria_pai');
+        
+        if ($categoria_pai == 0)
+            $categoria_pai = null;
 
     	$categoriaProduto = new CategoriaProdutos();
     	$categoriaProduto->nome = $nome;
@@ -21,13 +25,16 @@ class categoriaProdutosController extends Controller
             $msg = "Categoria de produto não foi cadastrada!";
          }
 
-         return view('confirm', ['mensagem' => $msg ]);
+         return view('resultado', ['mensagem' => $msg ]);
 
     }
 
     function alterarCategoriaProduto(Request $req, $id){
        	$nome = $req->input('name');
-    	$descricao = $req->input('categoria_pai');
+    	$categoria_pai = $req->input('categoria_pai');
+
+        if ($categoria_pai == 0)
+            $categoria_pai = null;
 
     	$categoriaProduto = CategoriaProdutos::find($id);
     	$categoriaProduto->nome = $nome;
@@ -39,7 +46,7 @@ class categoriaProdutosController extends Controller
             $msg = "Atualização de categoria de produto não foi bem sucedida!";
          }
 
-         return view('confirm', ['mensagem' => $msg]);
+         return view('resultado', ['mensagem' => $msg]);
     }
 
     function deletarCategoriaProduto($id){
@@ -51,19 +58,33 @@ class categoriaProdutosController extends Controller
             $msg = "Erro ao excluir categoria de produto!";
          }
 
-         return view('confirm', ['mensagem' => $msg]);
+         return view('resultado', ['mensagem' => $msg]);
+    }
+
+    function telaListarCategoriaProdutoTodos(){
+        $produtos = Produto::all();
+        return view('listar_categoria', ['produtos' => $produtos]);
+    }
+
+    function telaListarCategoriaProdutoAchar($id){
+        $produtos = Produto::where('id_categoria_produtos', $id)->get();
+        $categoria = CategoriaProdutos::find($id);
+        return view('listar_categoria', ['categoria'=>$categoria, 'produtos' => $produtos]);
     }
 
     function telaListarCategoriaProduto(){
-        return view('categoria_produtos.listar');
+        $categorias = CategoriaProdutos::all();
+        return view('categoria_produtos.listar', ['categorias' => $categorias]);
     }
 
     function telaCadastrarCategoriaProduto(){
-        return view('categoria_produtos.adicionar');
+        $pais = CategoriaProdutos::all();
+        return view('categoria_produtos.adicionar', ['pais'=>$pais]);
     }
 
      function telaAlterarCategoriaProduto($id){
-        $categoria_produtos = CategoriaProdutos::find($id);
-        return view('categoria_produtos.alterar', ['categoria_produtos' => $categoria_produtos]);
+        $c = CategoriaProdutos::find($id);
+        $pais = CategoriaProdutos::all();
+        return view('categoria_produtos.alterar', ['c'=>$c, 'pais'=> $pais]);
     }
 }
