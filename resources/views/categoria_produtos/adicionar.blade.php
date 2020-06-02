@@ -5,16 +5,20 @@
             
 @section('content')
 
-<form>
+<form action="{{ route('cadastrarCategoriaProduto') }}" method="POST">
+  @csrf
   <div class="form-group">
-    <label for="exampleInputEmail1">Nome da categoria</label>
-    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Nome da categoria">
+    <label for="name">Nome da categoria</label>
+    <input type="text" class="form-control" id="name" name="name" placeholder="Nome da categoria">
   </div>
   <div class="form-group">
-    <label for="exampleInputPassword1">Categoria Pai</label>
-    <select class="form-control" id="exampleInputPassword1">
-      <option>Nenhuma categoria pai</option>
-      <option>#1 - Teste</option>
+    <label for="categoria_pai">Categoria Pai</label>
+    <select class="form-control" id="categoria_pai" name="categoria_pai">
+      <option value="0">Nenhuma categoria pai</option>
+      
+      @foreach($pais as $p)
+        <option value="{{ $p->id }}">#{{ $p->id }} - {{ $p->nome }}</option>
+      @endforeach
     </select>
     <small id="emailHelp" class="form-text text-muted">Caso seja uma sub-categoria, selecionar acima quem é sua categoria "pai".</small>
   </div>

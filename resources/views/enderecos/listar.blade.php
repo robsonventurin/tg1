@@ -18,22 +18,24 @@
       </tr>
     </thead>
     <tbody>
+      @foreach ($enderecos as $e) 
       <tr>
-        <th scope="row">1</th>
-        <td>Residencial</td>
-        <td>Rua Coronel Osório Fagundes</td>
-        <td>247</td>
-        <td>Jardim Bela Vista</td>
-        <td>Campos Novos / SC</td>
+        <th scope="row">{{ $e->id }}</th>
+        <td>{{ $e->descricao }}</td>
+        <td>{{ $e->logradouro }}</td>
+        <td>{{ $e->numero }}</td>
+        <td>{{ $e->bairro }}</td>
+        <td>{{ $e->cidade->nome }} / {{ $e->cidade->estado }}</td>
         <td>
-          <a href="/enderecos/alterar/1">Alterar</a> -
-          <a href="#">Excluir</a> 
+          <a href="{{ route('telaAlterarEndereco', ['id' => $e->id ]) }}">Alterar</a> -
+          <a href="{{ route('excluirEndereco', ['id' => $e->id ]) }}">Excluir</a> 
         </td>
       </tr>
+      @endforeach
     </tbody>
   </table>
 
-  <a href="/enderecos/adicionar" class="btn btn-black py-3 px-5 btn-block">Adicionar Novo</a>
+  <a href="{{ route('telaCadastrarEndereco') }}" class="btn btn-black py-3 px-5 btn-block">Adicionar Novo</a>
 
 
 @endsection

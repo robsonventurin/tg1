@@ -15,19 +15,21 @@
       </tr>
     </thead>
     <tbody>
+      @foreach ($cidades as $c) 
       <tr>
-        <th scope="row">1</th>
-        <td>Campos Novos</td>
-        <td>SC</td>
+        <th scope="row">{{ $c->id }}</th>
+        <td>{{ $c-> nome}}</td>
+        <td>{{ $c->estado }}</td>
         <td>
-          <a href="/cidades/alterar/1">Alterar</a> -
-          <a href="#">Excluir</a> 
+          <a href="{{ route('telaAlterarCidade', ['id' => $c->id ]) }}">Alterar</a> -
+          <a href="{{ route('excluirCidade', ['id' => $c->id ]) }}">Excluir</a> 
         </td>
       </tr>
+      @endforeach
     </tbody>
   </table>
 
-  <a href="/cidades/adicionar" class="btn btn-black py-3 px-5 btn-block">Adicionar Novo</a>
+  <a href="{{ route('telaCadastrarCidade') }}" class="btn btn-black py-3 px-5 btn-block">Adicionar Novo</a>
 
 
 @endsection
