@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Produto;
+use App\CategoriaProdutos;
 
 class ProdutosController extends Controller
 {
@@ -11,15 +12,15 @@ class ProdutosController extends Controller
     	$nome = $req->input('name');
     	$descricao = $req->input('descricao');
     	$qtd = $req->input('qtd');
-    	$slug = $req->input('slug');
     	$valor = $req->input('valor');
+    	$categoria = $req->input('categoria');
 
     	$produto = new Produto();
     	$produto->nome = $nome;
     	$produto->descricao = $descricao;
     	$produto->qtd = $qtd;
-    	$produto->slug = $slug;
     	$produto->valor = $valor;
+    	$produto->id_categoria_produtos = $categoria;
 
     	if ($produto->save()) {
             $msg = "Cadastro realizado com sucesso!";
@@ -27,23 +28,23 @@ class ProdutosController extends Controller
             $msg = "Cadastro não foi bem sucedido!";
          }
 
-         return view('confirm', ['mensagem' => $msg ]);
+         return view('resultado', ['mensagem' => $msg ]);
 
     }
 
     function alterarProduto(Request $req, $id){
-       $nome = $req->input('name');
+    	$nome = $req->input('name');
     	$descricao = $req->input('descricao');
     	$qtd = $req->input('qtd');
-    	$slug = $req->input('slug');
     	$valor = $req->input('valor');
+    	$categoria = $req->input('categoria');
 
     	$produto = Produto::find($id);
     	$produto->nome = $nome;
     	$produto->descricao = $descricao;
     	$produto->qtd = $qtd;
-    	$produto->slug = $slug;
     	$produto->valor = $valor;
+    	$produto->id_categoria_produtos = $categoria;
 
         if ($produto->save()) {
             $msg = "Cadastro atualizado com sucesso!";
@@ -51,7 +52,7 @@ class ProdutosController extends Controller
             $msg = "Atualização não foi bem sucedido!";
          }
 
-         return view('confirm', ['mensagem' => $msg]);
+         return view('resultado', ['mensagem' => $msg]);
     }
 
     function deletarProduto($id){
@@ -63,19 +64,32 @@ class ProdutosController extends Controller
             $msg = "Erro ao excluir Produto!";
          }
 
-         return view('confirm', ['mensagem' => $msg]);
+         return view('resultado', ['mensagem' => $msg]);
+    }
+
+    function telaListarProdutoSingle($id, $nome){
+        $produto = Produto::find($id);
+        return view('produtos.produto', ['produto' => $produto]);
     }
 
     function telaListarProduto(){
-        return view('produtos.listar');
+        $produtos = Produto::all();
+        return view('produtos.listar', ['produtos' => $produtos]);
+    }
+
+    function telaListarProdutoFind($termo){
+        $produtos = Produto::all();
+        return view('listar_busca', ['termo' => $termo, 'produtos' => $produtos]);
     }
 
     function telaCadastrarProduto(){
-        return view('produtos.adicionar');
+        $categorias = CategoriaProdutos::all();
+        return view('produtos.adicionar', ['categorias' => $categorias]);
     }
 
      function telaAlterarProduto($id){
-        $produtos = Produto::find($id);
-        return view('produtos.alterar', ['produtos' => $produtos]);
+        $p = Produto::find($id);
+        $categorias = CategoriaProdutos::all();
+        return view('produtos.alterar', ['p' => $p, 'categorias' => $categorias]);
     }
 }

@@ -40,10 +40,10 @@ class User extends Authenticatable
     ];
 
     function enderecos(){
-        return $this->hasMany('App\Enderecos', 'id_usuario', 'id');
+        return $this->hasMany('App\Enderecos', 'id_users', 'id');
     }
 
     function vendas(){
-        return $this->hasMany('App\Venda', 'id_usuario', 'id');
+        return $this->hasMany('App\Venda', 'id_users', 'id');
     }
 }
