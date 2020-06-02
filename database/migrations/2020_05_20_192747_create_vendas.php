@@ -18,10 +18,12 @@ class CreateVendas extends Migration
             $table->dateTime('data');
             $table->float('valor_total');
             $table->unsignedBigInteger('id_users');
+            $table->unsignedBigInteger('id_enderecos');
             $table->softDeletes();
             
             $table->timestamps();
             $table->foreign('id_users')->references('id')->on('users');
+            $table->foreign('id_enderecos')->references('id')->on('enderecos');
         });
     }
 

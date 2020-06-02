@@ -14,10 +14,10 @@ class AlterUsers extends Migration
     public function up()
     {
         schema::table('users', function (Blueprint $table){
-           $table->string('cpf', 14);
-           $table->string('rg', 9);
-           $table->date('data_nasc');
-           $table->string('telefone',20);
+           $table->string('cpf', 14)->nullable();
+           $table->string('rg', 9)->nullable();
+           $table->date('data_nasc')->nullable();
+           $table->string('telefone',20)->nullable();
 
         });
     }

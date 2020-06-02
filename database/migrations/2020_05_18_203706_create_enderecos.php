@@ -20,10 +20,12 @@ class CreateEnderecos extends Migration
             $table->integer('numero');
             $table->string('bairro', 200);
             $table->unsignedBigInteger('id_cidades');
+            $table->unsignedBigInteger('id_users');
             $table->softDeletes();
             
             $table->timestamps();
             $table->foreign('id_cidades')->references('id')->on('cidades');
+            $table->foreign('id_users')->references('id')->on('users');
         });
     }
 
