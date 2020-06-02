@@ -18,7 +18,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'cpf', 'rg', 'data_nasc', 'telefone',
+        'name', 'email', 'password', 'cpf', 'rg', 'data_nasc', 'telefone', 'nivel'
     ];
 
     /**
@@ -45,5 +45,9 @@ class User extends Authenticatable
 
     function vendas(){
         return $this->hasMany('App\Venda', 'id_users', 'id');
+    }
+
+    function ehAdmin(){
+        return $this->nivel == 1;
     }
 }
