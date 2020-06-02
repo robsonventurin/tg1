@@ -5,36 +5,31 @@
             
 @section('content')
 
-<form>
+<form action="{{ route('cadastrarProduto') }}" method="POST">
+  @csrf
   <div class="form-group">
-    <label for="exampleInputEmail1">Nome</label>
-    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Nome">
+    <label for="name">Nome</label>
+    <input type="text" class="form-control" id="name" name="name" placeholder="Nome">
   </div>
   <div class="form-group">
-    <label for="exampleInputEmail1">Descrição</label>
-    <textarea class="form-control" id="exampleInputEmail1"></textarea>
+    <label for="descricao">Descrição</label>
+    <textarea class="form-control" id="descricao" name="descricao"></textarea>
   </div>
   <div class="form-group">
-    <label for="exampleInputEmail1">Quantidade Estoque</label>
-    <input type="number" step="1" min="0" max="999" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+    <label for="qtd">Quantidade Estoque</label>
+    <input type="number" step="1" min="0" max="999" class="form-control" id="qtd" name="qtd">
   </div>
   <div class="form-group">
-    <label for="exampleInputEmail1">Valor</label>
-    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Valor">
+    <label for="valor">Valor</label>
+    <input type="text" class="form-control" id="valor" name="valor" placeholder="Valor">
   </div>
   <div class="form-group">
-    <label for="exampleInputPassword1">Categoria</label>
-    <select class="form-control" id="exampleInputPassword1">
-      <option>#1 - Teste</option>
+    <label for="categoria">Categoria</label>
+    <select class="form-control" id="categoria" name="categoria">
+      @foreach($categorias as $c) 
+        <option value="{{ $c->id }}">#{{ $c->id}} - {{ $c->nome }}</option>
+      @endforeach
     </select>
-  </div>
-  <div class="form-group">
-    <label for="exampleInputPassword1">Categoria Pai</label>
-    <select class="form-control" id="exampleInputPassword1">
-      <option>Nenhuma categoria pai</option>
-      <option>#1 - Teste</option>
-    </select>
-    <small id="emailHelp" class="form-text text-muted">Caso seja uma sub-categoria, selecionar acima quem é sua categoria "pai".</small>
   </div>
   <button type="submit" class="btn btn-primary btn-block">Enviar</button>
 </form>

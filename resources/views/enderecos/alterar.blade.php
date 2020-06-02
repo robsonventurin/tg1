@@ -5,31 +5,35 @@
             
 @section('content')
 
-<form>
+<form action="{{ route('alterarEndereco', ['id'=>$e->id]) }}" method="POST">
+  @csrf
   <div class="form-group">
-    <label for="exampleInputEmail1">Descrição</label>
-    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Descrição">
+    <label for="descricao">Descrição</label>
+    <input type="text" class="form-control" id="descricao" name="descricao" placeholder="Descrição" value="{{ $e->descricao }}">
   </div>
   <div class="form-group">
-    <label for="exampleInputEmail1">Logradouro</label>
-    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Logradouro">
+    <label for="logradouro">Logradouro</label>
+    <input type="text" class="form-control" id="logradouro" name="logradouro" placeholder="Logradouro" value="{{ $e->logradouro }}">
   </div>
   <div class="form-group">
-    <label for="exampleInputEmail1">Número</label>
-    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Número">
+    <label for="numero">Número</label>
+    <input type="text" class="form-control" id="numero" name="numero" placeholder="Número" value="{{ $e->numero }}">
   </div>
   <div class="form-group">
-    <label for="exampleInputEmail1">Bairro</label>
-    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Bairro">
+    <label for="bairro">Bairro</label>
+    <input type="text" class="form-control" id="bairro" name="bairro" placeholder="Bairro" value="{{ $e->bairro }}">
   </div>
   <div class="form-group">
-    <label for="exampleInputEmail1">Cidade</label>
-    <select class="form-control">
-      <option>Campos Novos / SC</option>
+    <label for="id_cidades">Cidade</label>
+    <select class="form-control" name="id_cidades">
+      @foreach($cidades as $c) 
+        <option value="{{ $c->id }}" @if($c->id == $e->id_cidades) selected @endif>#{{ $c->id }} - {{ $c->nome }} / {{ $c->estado }}</option>
+      @endforeach
     </select>
   </div>
-  <button type="submit" class="btn btn-primary btn-block">Alterar</button>
+  <button type="submit" class="btn btn-primary btn-block">Enviar</button>
 </form>
+
 
 
 @endsection

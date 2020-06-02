@@ -19,23 +19,24 @@
       </tr>
     </thead>
     <tbody>
+      @foreach ($produtos as $p) 
       <tr>
-        <th scope="row">1</th>
-        <td>Celular</td>
-        <td>Celular muito bom esse</td>
-        <td>2</td>
-        <td>/celular/testando/top</td>
-        <td>R$ 350,00</td>
-        <td>Celulares/Smartphones</td>
+        <th scope="row">{{ $p->id }}</th>
+        <td>{{ $p->nome }}</td>
+        <td>{{ $p->descricao }}</td>
+        <td>{{ $p->estoque }}</td>
+        <td>{{ $p->slug }}</td>
+        <td>@money($p->valor)</td>
+        <td>{{ $p->categoria->nome }}</td>
         <td>
-          <a href="/produtos/alterar/1">Alterar</a> -
-          <a href="#">Excluir</a> 
+        <a href="{{ route('telaAlterarProduto', ['id' => $p->id ]) }}">Alterar</a> -
+          <a href="{{ route('excluirProduto', ['id' => $p->id ]) }}">Excluir</a> 
         </td>
       </tr>
+      @endforeach
     </tbody>
   </table>
 
-  <a href="/produtos/adicionar" class="btn btn-black py-3 px-5 btn-block">Adicionar Novo</a>
-
+  <a href="{{ route('telaCadastrarProduto') }}" class="btn btn-black py-3 px-5 btn-block">Adicionar Novo</a>
 
 @endsection
