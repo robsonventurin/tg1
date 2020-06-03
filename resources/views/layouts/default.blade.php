@@ -41,14 +41,30 @@
                 <a class="dropdown-item" href="3.html">3</a> -->
               </div>
             </li>
-            <li class="nav-item"><a href="/carrinho" class="nav-link">Carrinho</a></li>
-            <li class="nav-item"><a href="/vendas/minhas_compras" class="nav-link">Minhas Compras</a></li>
-
-            <li class="nav-item"><a href="{{ route('telaListarCategoriaProduto') }}" class="nav-link">Categoria Produtos</a></li>
-            <li class="nav-item"><a href="{{ route('telaListarCidade') }}" class="nav-link">Cidades</a></li>
-            <li class="nav-item"><a href="{{ route('telaListarEndereco') }}" class="nav-link">Endereços</a></li>
-            <li class="nav-item"><a href="{{ route('telaListarProduto') }}" class="nav-link">Produtos</a></li>
-            <li class="nav-item"><a href="{{ route('telaListarVenda') }}" class="nav-link">Vendas</a></li>
+            <li class="dropown-item"><a href="/carrinho" class="nav-link">Carrinho</a></li>
+            
+            @if(Auth::user()->ehAdmin())
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Administração</a>
+                <div class="dropdown-menu" aria-labelledby="dropdown04">
+                  <a class="dropdown-item" href="{{ route('telaListarCategoriaProduto') }}" class="nav-link">Categoria Produtos</a>
+                  <a class="dropdown-item" href="{{ route('telaListarCidade') }}" class="nav-link">Cidades</a>
+                  <a class="dropdown-item" href="{{ route('telaListarEndereco') }}" class="nav-link">Endereços</a>
+                  <a class="dropdown-item" href="{{ route('telaListarProduto') }}" class="nav-link">Produtos</a>
+                  <a class="dropdown-item" href="{{ route('telaListarVenda') }}" class="nav-link">Vendas</a>
+                </div>
+              </li>
+            @else
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Minha Página</a>
+                <div class="dropdown-menu" aria-labelledby="dropdown04">
+                  <a class="dropdown-item" href="/vendas/minhas_compras" class="nav-link">Minhas Compras</a>
+                  <a class="dropdown-item" href="{{ route('telaListarEndereco') }}" class="nav-link">Meus Endereços</a>
+                </div>
+              </li>
+            @endif
+            
+            
 
           </ul>
         </div>

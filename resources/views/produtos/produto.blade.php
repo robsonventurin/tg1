@@ -10,13 +10,14 @@
   @if(session()->has('mensagem'))
     {{ session('mensagem') }}<br><br>
   @endif
-
+      @php $i = 0; @endphp
       <div class="row">
         <div class="col-md-7">
           <div class="carousel slide" data-ride="carousel" id="carousel">
             <div class="carousel-inner">
               @foreach ($produto->fotos as $f) 
-              <div class="carousel-item active"> <img class="d-block img-fluid w-100" src="{{ $f->nome }}">
+              @php $i++; @endphp
+              <div class="carousel-item @if($i == 1) active @endif"> <img class="d-block img-fluid w-100" src="{{ asset('storage/'.$f->nome) }}">
                 <div class="carousel-caption">
                   <!-- <h5 class="m-0">Carousel</h5>
                   <p>with controls</p> -->
