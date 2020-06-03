@@ -23,25 +23,23 @@ Route::middleware(['auth'])->group(function(){
 
 	Route::middleware(['eh_admin'])->group(function(){
 
-		Route::get('/categoria/listar_todos', function () { return view('listar_categoria'); });
 
-		Route::get('/categoria/listar_todos', 'categoriaProdutosController@telaListarCategoriaProdutoTodos')->name('telaListarCategoriaProduto1');
-		Route::get('/categoria/listar/{id}', 'categoriaProdutosController@telaListarCategoriaProdutoAchar')->name('telaListarCategoriaProdutoAchar');
-		Route::get('/categoria_produtos/listar', 'categoriaProdutosController@telaListarCategoriaProduto')->name('telaListarCategoriaProduto');
 		Route::get('/categoria_produtos/cadastrar', 'categoriaProdutosController@telaCadastrarCategoriaProduto')->name('telaCadastrarCategoriaProduto');
 		Route::post('/categoria_produtos/cadastrar/novo', 'categoriaProdutosController@cadastrarCategoriaProduto')->name('cadastrarCategoriaProduto');
 		Route::get('/categoria_produtos/alterar/{id}', 'categoriaProdutosController@telaAlterarCategoriaProduto')->name('telaAlterarCategoriaProduto');
 		Route::post('/categoria_produtos/alterar/{id}', 'categoriaProdutosController@alterarCategoriaProduto')->name('alterarCategoriaProduto');
 		Route::get('/categoria_produtos/excluir/{id}', 'categoriaProdutosController@deletarCategoriaProduto')->name('excluirCategoriaProduto'); 
 
-		Route::get('/produto/{id}/{nome}', 'ProdutosController@telaListarProdutoSingle')->name('mostra_produto');
-		Route::get('/produtos/listar', 'ProdutosController@telaListarProduto')->name('telaListarProduto');
 		Route::get('/produtos/cadastrar', 'ProdutosController@telaCadastrarProduto')->name('telaCadastrarProduto');
 		Route::post('/produtos/cadastrar/novo', 'ProdutosController@cadastrarProduto')->name('cadastrarProduto');
 		Route::get('/produtos/alterar/{id}', 'ProdutosController@telaAlterarProduto')->name('telaAlterarProduto');
 		Route::post('/produtos/alterar/{id}', 'ProdutosController@alterarProduto')->name('alterarProduto');
 		Route::get('/produtos/buscar/{termo}', 'ProdutosController@telaListarProdutoFind')->name('telaListarProdutoBuscar');
 		Route::GET('/produtos/excluir/{id}', 'ProdutosController@deletarProduto')->name('excluirProduto'); 
+		
+		Route::GET('/produtos/fotos/{id}', 'FotosProdutosController@telaFotoProduto')->name('telaFotoProduto'); 
+		Route::post('/produtos/fotos/adicionar/{id}', 'FotosProdutosController@cadastrarFotoProduto')->name('cadastrarFotoProduto'); 
+		Route::get('/produtos/fotos/excluir/{id}', 'FotosProdutosController@deletarFotoProduto')->name('excluirFotoProduto'); 
 
 		Route::get('/cidades/listar', 'CidadesController@telaListarCidade')->name('telaListarCidade');
 		Route::get('/cidades/cadastrar', 'CidadesController@telaCadastrarCidade')->name('telaCadastrarCidade');
@@ -54,9 +52,15 @@ Route::middleware(['auth'])->group(function(){
 
 
 		
+		Route::get('/categoria/listar_todos', function () { return view('listar_categoria'); });
+		Route::get('/categoria/listar_todos', 'categoriaProdutosController@telaListarCategoriaProdutoTodos')->name('telaListarCategoriaProduto1');
+		Route::get('/categoria/listar/{id}', 'categoriaProdutosController@telaListarCategoriaProdutoAchar')->name('telaListarCategoriaProdutoAchar');
+		Route::get('/categoria_produtos/listar', 'categoriaProdutosController@telaListarCategoriaProduto')->name('telaListarCategoriaProduto');
 
+		Route::get('/produto/{id}/{nome}', 'ProdutosController@telaListarProdutoSingle')->name('mostra_produto');
+		Route::get('/produtos/listar', 'ProdutosController@telaListarProduto')->name('telaListarProduto');
+		
 		Route::get('/busca/resultado', function () { return view('listar_busca'); });
-
 
 		Route::get('/carrinho', 'CarrinhoController@telaListar')->name('carrinho');
 		Route::get('/carrinho/adicionar/{id}', 'CarrinhoController@adicionar')->name('carrinho_adicionar');
