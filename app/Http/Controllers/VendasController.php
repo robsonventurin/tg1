@@ -41,19 +41,29 @@ class VendasController extends Controller
     }
 
     function telaListarVendas(){
-        $vendas = Venda::all();
+        if (Auth::user()->ehAdmin())
+            $vendas = Venda::all();
+        else
+            $vendas = Auth::user()->vendas;
+
         return view('vendas.listar', ['vendas'=>$vendas]);
     }
 
 
     function telaMinhasCompras(){
-        $vendas = Auth::user()->vendas;
+        if (Auth::user()->ehAdmin())
+            $vendas = Venda::all();
+        else
+            $vendas = Auth::user()->vendas;
+
         return view('vendas.minhas_compras', ['vendas' => $vendas]);
     }
 
     function telaMinhasComprasId($id){
         $venda = Venda::find($id);
         $produtos = $venda->produtos;
+    
+
         if ($produtos != null) {
             foreach($produtos as $key => $p) {
                 $produtos[$key]['info'] = Produto::find($p['id']);

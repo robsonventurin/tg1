@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
 use App\Enderecos;
 use App\Cidade;
 
@@ -70,7 +72,13 @@ class EnderecosController extends Controller
     }
 
     function telaListarEndereco() {
-        $lista = Enderecos::all();
+        $id = Auth::user()->id;
+        if (Auth::user()->ehAdmin())
+            $lista = Enderecos::all();
+        else
+            $lista = Auth::user()->enderecos;
+
+
         return view ("enderecos.listar", ['enderecos'=>$lista]);
     }
 

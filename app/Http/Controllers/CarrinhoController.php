@@ -34,24 +34,36 @@ class CarrinhoController extends Controller
         $data = Session::get('carrinho');
         $pass = false;
 
+        $p = Produto::find($id);
+        $not = false;
+        
         if ($data == null) {
-            $data[] = array(
-                'id' => $id,
-                'qtd' => 1,
-            );
-        } else {
-            foreach($data as $key => $p) {
-                if ($data[$key]['id'] == $id) {
-                    $data[$key]['qtd'] = $data[$key]['qtd'] + 1;
-                    $pass = true;
-                }
-            }
-
-            if (!$pass) {
+            if ($p->qtd >= 1) {
                 $data[] = array(
                     'id' => $id,
                     'qtd' => 1,
                 );
+            }
+        } else {
+            foreach($data as $key => $pr) {
+                if ($data[$key]['id'] == $id) {
+                    $nova = $data[$key]['qtd'] + 1;
+                    if ($p->qtd >= $nova) {
+                        $data[$key]['qtd'] = $nova;
+                        $pass = true;
+                    } else 
+                        $not = true;
+                    
+                }
+            }
+
+            if (!$pass && !$not) {
+                if ($p->qtd >= 1) {
+                    $data[] = array(
+                        'id' => $id,
+                        'qtd' => 1,
+                    );
+                }
             }
         }
 
@@ -121,6 +133,8 @@ class CarrinhoController extends Controller
             
         foreach($data as $key => $c) {
             $p = Produto::find($c['id']);
+            $p->qtd = $p->qtd - $c['qtd'];
+            $p->save();
             $venda->produtos()->attach($p->id, ['quantidade'=>$c['qtd'], 'subtotal'=>($p->valor * $c['qtd'])]);
         }
 

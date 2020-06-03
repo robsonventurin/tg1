@@ -28,7 +28,7 @@ class ProdutosController extends Controller
             $msg = "Cadastro não foi bem sucedido!";
          }
 
-         return view('resultado', ['mensagem' => $msg ]);
+        return redirect()->route('telaFotoProduto', ['id' => $produto->id]);
 
     }
 

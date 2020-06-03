@@ -44,12 +44,19 @@ class Produto extends Model
 
     function montaProduto() {
         $p = $this;
-        $foto = $this->fotos()->first();
+        $foto = $this->fotos->first();
+
+        if ($foto != null) {
+            $nf = $foto->nome;
+        } else {     
+            $nf = '';
+        }
+    
 
         echo '
             <div class="col-md-4 p-3 produto">
                 <div class="card box-shadow">
-                <a href="'.route('mostra_produto', ['id'=>$p->id, 'nome'=>$p->slug]).'" class="image" style="background-image:url(\''.$foto->nome.'\')">
+                <a href="'.route('mostra_produto', ['id'=>$p->id, 'nome'=>$p->slug]).'" class="image" style="background-image:url(\''.asset('storage/'.$nf).'\')">
                     
                 </a>
                 <div class="card-body">
