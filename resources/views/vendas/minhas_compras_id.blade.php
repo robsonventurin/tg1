@@ -23,14 +23,14 @@
     <tbody>
       @foreach($produtos as $p)
         @php
-          $total = $total + ($p['info']->valor * $p['qtd']);
+          $total = $total + ($p['info']->valor * $p->pivot->quantidade);
         @endphp
         <tr>
           <th scope="row">{{ $p['id'] }}</th>
           <td>{{ $p['info']->nome }}</td>
-          <td class="qtd">{{ $p['qtd'] }}</td>
+          <td class="qtd">{{ $p->pivot->quantidade }}</td>
           <td>@money($p['info']->valor)</td>
-          <td>@money($p['info']->valor * $p['qtd'])</td>
+          <td>@money($p['info']->valor * $p->pivot->quantidade)</td>
         </tr>
       @endforeach
       <tr>

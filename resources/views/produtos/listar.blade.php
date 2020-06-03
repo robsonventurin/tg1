@@ -23,13 +23,14 @@
       <tr>
         <th scope="row">{{ $p->id }}</th>
         <td>{{ $p->nome }}</td>
-        <td>{{ $p->descricao }}</td>
-        <td>{{ $p->estoque }}</td>
+        <td>{{ \Illuminate\Support\Str::limit($p->descricao, 55) }}</td>
+        <td>{{ $p->qtd }}</td>
         <td>{{ $p->slug }}</td>
         <td>@money($p->valor)</td>
         <td>{{ $p->categoria->nome }}</td>
         <td>
-        <a href="{{ route('telaAlterarProduto', ['id' => $p->id ]) }}">Alterar</a> -
+          <a href="{{ route('telaAlterarProduto', ['id' => $p->id ]) }}">Alterar</a> -
+          <a href="{{ route('telaFotoProduto', ['id' => $p->id ]) }}">Ver Fotos</a> -
           <a href="{{ route('excluirProduto', ['id' => $p->id ]) }}">Excluir</a> 
         </td>
       </tr>
