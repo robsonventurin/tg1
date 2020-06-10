@@ -13,10 +13,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/home', 'HomeController@index')->name('home');
-
-
-Route::get('/', 'HomeController@index')->name('index');
 
 Route::middleware(['auth'])->group(function(){
 
@@ -51,17 +47,7 @@ Route::middleware(['auth'])->group(function(){
 
 
 		
-		Route::get('/categoria/listar_todos', function () { return view('listar_categoria'); });
-		Route::get('/categoria/listar_todos', 'categoriaProdutosController@telaListarCategoriaProdutoTodos')->name('telaListarCategoriaProduto1');
-		Route::get('/categoria/listar/{id}', 'categoriaProdutosController@telaListarCategoriaProdutoAchar')->name('telaListarCategoriaProdutoAchar');
-		Route::get('/categoria_produtos/listar', 'categoriaProdutosController@telaListarCategoriaProduto')->name('telaListarCategoriaProduto');
-
-		Route::get('/produto/{id}/{nome}', 'ProdutosController@telaListarProdutoSingle')->name('mostra_produto');
-		Route::get('/produtos/buscar/{termo}', 'ProdutosController@telaListarProdutoFind')->name('telaListarProdutoBuscar');
-		Route::get('/produtos/listar', 'ProdutosController@telaListarProduto')->name('telaListarProduto');
 		
-		Route::get('/busca/resultado', function () { return view('listar_busca'); });
-
 		Route::get('/carrinho', 'CarrinhoController@telaListar')->name('carrinho');
 		Route::get('/carrinho/adicionar/{id}', 'CarrinhoController@adicionar')->name('carrinho_adicionar');
 		Route::get('/carrinho/diminuir/{id}', 'CarrinhoController@diminuir')->name('carrinho_diminuir');
@@ -84,12 +70,26 @@ Route::middleware(['auth'])->group(function(){
 });
 
 
+Route::get('/categoria/listar_todos', function () { return view('listar_categoria'); });
+Route::get('/categoria/listar_todos', 'categoriaProdutosController@telaListarCategoriaProdutoTodos')->name('telaListarCategoriaProduto1');
+Route::get('/categoria/listar/{id}', 'categoriaProdutosController@telaListarCategoriaProdutoAchar')->name('telaListarCategoriaProdutoAchar');
+Route::get('/categoria_produtos/listar', 'categoriaProdutosController@telaListarCategoriaProduto')->name('telaListarCategoriaProduto');
 
+Route::get('/produto/{id}/{nome}', 'ProdutosController@telaListarProdutoSingle')->name('mostra_produto');
+Route::get('/produtos/buscar/{termo}', 'ProdutosController@telaListarProdutoFind')->name('telaListarProdutoBuscar');
+Route::get('/produtos/listar', 'ProdutosController@telaListarProduto')->name('telaListarProduto');
+		
+Route::get('/busca/resultado', function () { return view('listar_busca'); });
+
+
+Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/', 'HomeController@index')->name('index');
+
+Route::get('/logout', 'UsersController@logout')->name('logout'); 
 
 
 
 
 Auth::routes();
-Route::get('/logout', 'UsersController@logout')->name('logout'); 
 
 

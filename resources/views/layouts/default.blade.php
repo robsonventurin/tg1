@@ -41,9 +41,11 @@
                 <a class="dropdown-item" href="3.html">3</a> -->
               </div>
             </li>
-            <li class="dropown-item"><a href="/carrinho" class="nav-link">Carrinho</a></li>
-            
-            @if(Auth::user()->ehAdmin())
+            @if(!is_null(Auth::user())) 
+              <li class="dropown-item"><a href="/carrinho" class="nav-link">Carrinho</a></li>
+            @endif
+
+            @if(!is_null(Auth::user()) && Auth::user()->ehAdmin())
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Administração</a>
                 <div class="dropdown-menu" aria-labelledby="dropdown04">
@@ -56,16 +58,23 @@
                   <a class="dropdown-item" href="{{ route('logout') }}" class="nav-link">Sair</a>
                 </div>
               </li>
-            @else
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Minha Página</a>
-                <div class="dropdown-menu" aria-labelledby="dropdown04">
-                  <a class="dropdown-item" href="/vendas/minhas_compras" class="nav-link">Minhas Compras</a>
-                  <a class="dropdown-item" href="{{ route('telaListarEndereco') }}" class="nav-link">Meus Endereços</a>
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="{{ route('logout') }}" class="nav-link">Sair</a>
-                </div>
-              </li>
+            @elseif(!is_null(Auth::user())) 
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Minha Página</a>
+                  <div class="dropdown-menu" aria-labelledby="dropdown04">
+                    <a class="dropdown-item" href="/vendas/minhas_compras" class="nav-link">Minhas Compras</a>
+                    <a class="dropdown-item" href="{{ route('telaListarEndereco') }}" class="nav-link">Meus Endereços</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="{{ route('logout') }}" class="nav-link">Sair</a>
+                  </div>
+                </li>
+              @else
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Minha Página</a>
+                    <div class="dropdown-menu" aria-labelledby="dropdown04">
+                      <a class="dropdown-item" href="{{ route('login') }}" class="nav-link">Login</a>
+                    </div>
+                  </li>
             @endif
             
             
