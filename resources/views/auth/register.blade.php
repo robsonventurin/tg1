@@ -40,6 +40,62 @@
                         </div>
 
                         <div class="form-group row">
+                            <label for="cpf" class="col-md-4 col-form-label text-md-right">CPF</label>
+
+                            <div class="col-md-6">
+                                <input id="cpf" type="cpf" class="form-control " name="cpf" value="{{ old('cpf') }}" required>
+
+                                @error('cpf')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="rg" class="col-md-4 col-form-label text-md-right">RG</label>
+
+                            <div class="col-md-6">
+                                <input id="rg" type="rg" class="form-control " name="rg" value="{{ old('rg') }}" required>
+
+                                @error('rg')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="data_nasc" class="col-md-4 col-form-label text-md-right">Data Nascimento</label>
+
+                            <div class="col-md-6">
+                                <input id="data_nasc" type="text" class="form-control " name="data_nasc" value="{{ old('data_nasc') }}" required>
+
+                                @error('data_nasc')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="telefone" class="col-md-4 col-form-label text-md-right">Telefone</label>
+
+                            <div class="col-md-6">
+                                <input id="telefone" type="text" class="form-control " name="telefone" value="{{ old('telefone') }}" required>
+
+                                @error('telefone')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
                             <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
 
                             <div class="col-md-6">
@@ -67,6 +123,16 @@
                                     {{ __('Register') }}
                                 </button>
                             </div>
+
+                            @if(count($errors) > 0)
+    <div style="color:red">
+        @foreach ($errors->all() as $message)
+            <ul>
+                <li>{{$message}}</li>
+            </ul>
+        @endforeach
+    </div>
+@endif
                         </div>
                     </form>
                 </div>
