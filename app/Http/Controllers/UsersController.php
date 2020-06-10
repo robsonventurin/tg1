@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use Auth;
 
 class UsersController extends Controller
 {
@@ -23,7 +24,7 @@ class UsersController extends Controller
     	$usuario->cpf = $cpf;
     	$usuario->rg = $rg;
     	$usuario->data_nasc = $data_nasc;
-    	$usuario->telefone = $senha;
+    	$usuario->telefone = $telefone;
 
     	if ($usuario->save()) {
             $msg = "Cadastro realizado com sucesso!";
@@ -70,5 +71,11 @@ class UsersController extends Controller
          }
 
          return view('confirm', ['mensagem' => $msg]);
+    }
+
+    function logout(){
+        Auth::logout();
+        
+        return redirect()->route('login');
     }
 }
