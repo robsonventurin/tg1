@@ -55,8 +55,8 @@ class RegisterController extends Controller
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'cpf' => ['required', 'string', 'min:11'],
             'rg' => ['required', 'string', 'min:7'], 
-            'data_nasc' => ['required', 'date'], 
-            'telefone' => ['required', 'string', 'min:11'],
+            'data_nasc' => ['required', 'string'], 
+            'telefone' => ['required', 'string'],
         ]);
     }
 
@@ -78,5 +78,7 @@ class RegisterController extends Controller
             'telefone' => $data['telefone'],
             'nivel' => 0,
         ]);
+
+
     }
 }
