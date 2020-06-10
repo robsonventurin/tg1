@@ -52,6 +52,8 @@
                   <a class="dropdown-item" href="{{ route('telaListarEndereco') }}" class="nav-link">Endereços</a>
                   <a class="dropdown-item" href="{{ route('telaListarProduto') }}" class="nav-link">Produtos</a>
                   <a class="dropdown-item" href="{{ route('telaListarVenda') }}" class="nav-link">Vendas</a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="{{ route('logout') }}" class="nav-link">Sair</a>
                 </div>
               </li>
             @else
@@ -60,6 +62,8 @@
                 <div class="dropdown-menu" aria-labelledby="dropdown04">
                   <a class="dropdown-item" href="/vendas/minhas_compras" class="nav-link">Minhas Compras</a>
                   <a class="dropdown-item" href="{{ route('telaListarEndereco') }}" class="nav-link">Meus Endereços</a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="{{ route('logout') }}" class="nav-link">Sair</a>
                 </div>
               </li>
             @endif

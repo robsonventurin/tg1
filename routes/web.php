@@ -34,7 +34,6 @@ Route::middleware(['auth'])->group(function(){
 		Route::post('/produtos/cadastrar/novo', 'ProdutosController@cadastrarProduto')->name('cadastrarProduto');
 		Route::get('/produtos/alterar/{id}', 'ProdutosController@telaAlterarProduto')->name('telaAlterarProduto');
 		Route::post('/produtos/alterar/{id}', 'ProdutosController@alterarProduto')->name('alterarProduto');
-		Route::get('/produtos/buscar/{termo}', 'ProdutosController@telaListarProdutoFind')->name('telaListarProdutoBuscar');
 		Route::GET('/produtos/excluir/{id}', 'ProdutosController@deletarProduto')->name('excluirProduto'); 
 		
 		Route::GET('/produtos/fotos/{id}', 'FotosProdutosController@telaFotoProduto')->name('telaFotoProduto'); 
@@ -58,6 +57,7 @@ Route::middleware(['auth'])->group(function(){
 		Route::get('/categoria_produtos/listar', 'categoriaProdutosController@telaListarCategoriaProduto')->name('telaListarCategoriaProduto');
 
 		Route::get('/produto/{id}/{nome}', 'ProdutosController@telaListarProdutoSingle')->name('mostra_produto');
+		Route::get('/produtos/buscar/{termo}', 'ProdutosController@telaListarProdutoFind')->name('telaListarProdutoBuscar');
 		Route::get('/produtos/listar', 'ProdutosController@telaListarProduto')->name('telaListarProduto');
 		
 		Route::get('/busca/resultado', function () { return view('listar_busca'); });
@@ -90,6 +90,6 @@ Route::middleware(['auth'])->group(function(){
 
 
 Auth::routes();
-
+Route::get('/logout', 'UsersController@logout')->name('logout'); 
 
 
