@@ -19,6 +19,7 @@ class VendasController extends Controller
     	$venda->valor_total = $valor_total;
 
     	if ($venda->save()) {
+            
             $msg = "Venda cadastrada com sucesso!";
          } else {
             $msg = "Cadastro de Venda não foi bem sucedido!";
