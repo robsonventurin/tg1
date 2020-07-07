@@ -11,6 +11,7 @@ use App\Enderecos;
 use App\User;
 
 
+
 class CarrinhoController extends Controller
 {
     function telaListar(){
@@ -26,6 +27,7 @@ class CarrinhoController extends Controller
 
         if ($produtos == null)
             $produtos = array();
+       
 
         return view('carrinho', ['produtos' => $produtos, 'enderecos' => $enderecos]);
     }
@@ -129,6 +131,7 @@ class CarrinhoController extends Controller
         $venda->valor_total = $valor_total;
         $venda->id_users = Auth::user()->id;
         $venda->id_enderecos = $req->input('endereco_entrega');
+        $venda->status_entrega = 'Preparando';
         $venda->save();
             
         foreach($data as $key => $c) {
@@ -137,9 +140,27 @@ class CarrinhoController extends Controller
             $p->save();
             $venda->produtos()->attach($p->id, ['quantidade'=>$c['qtd'], 'subtotal'=>($p->valor * $c['qtd'])]);
         }
+        
+        //robventurin@gmail.com | teste
+        $info = \Http::post('http://webalunos.cacador.ifsc.edu.br/CacaPay/public/api/pagamentos', [
+            'token' => '$2y$10$OOuqHjns/dJFQCIukVN4t.lrs2xi0uH2h0/sW8WUvuiMT.Sb7DW4a',
+            'cpf' => $venda->usuario->cpf,
+            'valor' => $venda->valor_total
+        ]);
+        
+        if ($info->status() == 201) {
+            $venda->status_pagamento = "Aprovado";
+        } else {
+            $venda->status_pagamento = "Não Aprovado";
+        }
+
+        $venda->save();
+
 
         Session::forget('carrinho');
         Session::save();
+
+        
 
         return view('resultado', [ "mensagem" => 'Você acabou de finalizar a sua compra!']);
 
