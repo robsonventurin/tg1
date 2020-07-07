@@ -9,6 +9,7 @@ use App\Produto;
 use App\Venda;
 use App\Enderecos;
 use App\User;
+use App\Config;
 
 
 
@@ -147,11 +148,22 @@ class CarrinhoController extends Controller
             'cpf' => $venda->usuario->cpf,
             'valor' => $venda->valor_total
         ]);
+
+        $urlCacalog = Config::all()->where('short_name', '=', 'link_cacalog')[0]->link;
+        $info2 = \Http::post($urlCacalog . '/api/entregas', [
+            'token' => '$2y$10$OOuqHjns/dJFQCIukVN4t.lrs2xi0uH2h0/sW8WUvuiMT.Sb7DW4a',
+            "cep" => $venda->endereco->id,
+            "numeroCasa" => $venda->endereco->numero,
+            "id_pedido" =>$venda->id,
+            "cliente" => Auth::user()->name,
+            "qtdProdutos" => count($venda->produtos),
+        ]);
         
-        if ($info->status() == 201) {
-            $venda->status_pagamento = "Aprovado";
+        //dd($info2);
+        if ($info2->status() == 201) {
+            $venda->status_entrega = "Enviado";
         } else {
-            $venda->status_pagamento = "Não Aprovado";
+            $venda->status_entrega = "Não Enviado";
         }
 
         $venda->save();

@@ -65,6 +65,8 @@
                   <a class="dropdown-item" href="{{ route('telaListarProduto') }}" class="nav-link">Produtos</a>
                   <a class="dropdown-item" href="{{ route('telaListarVenda') }}" class="nav-link">Vendas</a>
                   <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="{{ route('telaConfig') }}" class="nav-link">Configurações Gerais</a>
+                  <div class="dropdown-divider"></div>
                   <a class="dropdown-item" href="{{ route('logout') }}" class="nav-link">Sair</a>
                 </div>
               </li>

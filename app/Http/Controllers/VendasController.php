@@ -78,4 +78,11 @@ class VendasController extends Controller
 
         return view('vendas.listar_itens', ['venda' => $venda]);
     }
+
+    function statusEntrega(Request $req, $id_pedido) {
+        //recebe do caçalog
+        $pedido = Vendas::find($id_pedido);
+        $pedido->status_entrega = $req['statusEntrega'];
+        $pedido->save();
+    }
 }

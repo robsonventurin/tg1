@@ -24,7 +24,7 @@ class CidadesController extends Controller
 
          return view('resultado', ['mensagem' => $msg ]);
 
-}
+    }
 
     function alterarCidade(Request $req, $id){
         $nome = $req->input('name');
