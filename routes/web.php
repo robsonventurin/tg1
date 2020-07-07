@@ -43,6 +43,10 @@ Route::middleware(['auth'])->group(function(){
 		Route::post('/cidades/alterar/{id}', 'CidadesController@alterarCidade')->name('alterarCidade');
 		Route::get('/cidades/excluir/{id}', 'CidadesController@deletarCidade')->name('excluirCidade');
 
+		Route::get('/config', 'ConfigController@telaConfig')->name('telaConfig');
+		Route::post('/config/alterar', 'ConfigController@alterarConfig')->name('alterarConfig');
+		
+		Route::patch('/api/vendas/{id_pedido}', 'VendasController@statusEntrega')->name('status_entrega');
 	});
 
 
