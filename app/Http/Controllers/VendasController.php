@@ -82,7 +82,7 @@ class VendasController extends Controller
     function statusEntrega(Request $req, $id_pedido) {
         //recebe do caçalog
         $pedido = Vendas::find($id_pedido);
-        $pedido->status_entrega = $req['statusEntrega'];
+        $pedido->status_entrega = $req->json('statusEntrega');
         $pedido->save();
     }
 }
