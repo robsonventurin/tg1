@@ -20,6 +20,8 @@ Route::middleware(['auth'])->group(function(){
 	Route::middleware(['eh_admin'])->group(function(){
 
 
+		Route::get('/dashboard', 'AppController@dashboard')->name('telaDashboard');
+
 		Route::get('/categoria_produtos/cadastrar', 'categoriaProdutosController@telaCadastrarCategoriaProduto')->name('telaCadastrarCategoriaProduto');
 		Route::post('/categoria_produtos/cadastrar/novo', 'categoriaProdutosController@cadastrarCategoriaProduto')->name('cadastrarCategoriaProduto');
 		Route::get('/categoria_produtos/alterar/{id}', 'categoriaProdutosController@telaAlterarCategoriaProduto')->name('telaAlterarCategoriaProduto');

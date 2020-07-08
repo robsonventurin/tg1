@@ -64,6 +64,7 @@
                   <a class="dropdown-item" href="{{ route('telaListarEndereco') }}" class="nav-link">Endereços</a>
                   <a class="dropdown-item" href="{{ route('telaListarProduto') }}" class="nav-link">Produtos</a>
                   <a class="dropdown-item" href="{{ route('telaListarVenda') }}" class="nav-link">Vendas</a>
+                  <a class="dropdown-item" href="{{ route('telaDashboard') }}" class="nav-link">Dashboard</a>
                   <div class="dropdown-divider"></div>
                   <a class="dropdown-item" href="{{ route('telaConfig') }}" class="nav-link">Configurações Gerais</a>
                   <div class="dropdown-divider"></div>
