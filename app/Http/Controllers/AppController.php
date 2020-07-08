@@ -13,9 +13,9 @@ class AppController extends Controller
     	$vendas_quantidade = Venda::selectRaw('DAY(created_at) as dia, COUNT(id) as nVendas')->groupByRaw('DAY(created_at)')->orderByRaw('1 ASC')->get();
 
     	
-    	$vendas_produto = VendasHasProdutos::selectRaw('SUM(quantidade) as quantidade, id_produto')->LeftJoin('produtos', 'produtos.id', '=', 'id_produto')->groupByRaw('id_produto')->get();
+    	$vendas_produto = VendasHasProdutos::selectRaw('SUM(quantidade) as quantidade, id_produto, produtos.nome as nome')->LeftJoin('produtos', 'produtos.id', '=', 'id_produto')->groupByRaw('id_produto')->get();
     	
-
+		//dd($vendas_produto);
     	return view('dashboard', ['vendas_quantidade' => $vendas_quantidade, 'vendas_produto' => $vendas_produto]);
 
     }

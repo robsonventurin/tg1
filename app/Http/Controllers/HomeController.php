@@ -44,9 +44,9 @@ class HomeController extends Controller
         }
 
 
-        dd($total_categoria);
+        //dd($total_categoria);
 
-        dd('');
+        //dd('');
 
         return view('index', ['produtos' => $produtos]);
         //return view('home');

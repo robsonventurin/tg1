@@ -38,7 +38,7 @@
           ['Dia', 'Quantidade'],
 
           @foreach ($vendas_produto as $vp)
-          ['{{ $vp->id_produto }}', {{$vp->quantidade}} ],
+          ['{{ $vp->nome }}', {{$vp->quantidade}} ],
           @endforeach
         ]);
 
