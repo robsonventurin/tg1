@@ -20,6 +20,11 @@ class Venda extends Model
     	return $this->belongsToMany('App\Produto', 'vendas_has_produtos', 'id_venda', 'id_produto')->withPivot(['id', 'quantidade', 'subtotal'])->withTimestamps();
     }
 
+
+    function produtos_cat(){
+    	return $this->belongsToMany('App\Produto', 'vendas_has_produtos', 'id_venda', 'id_produto')->withTimestamps()->withPivot(['id', 'quantidade', 'subtotal']);
+    }
+
     function endereco(){
     	return $this->belongsTo('App\Enderecos', 'id_enderecos', 'id');
     }
